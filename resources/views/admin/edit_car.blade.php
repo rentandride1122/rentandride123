@@ -30,46 +30,47 @@
           </div>
           @endif
               <div class=" form">
-                <form class="cmxform form-horizontal style-form" method="POST" enctype="multipart/form-data" action="{{ url('admin/car') }}">
+                <form class="cmxform form-horizontal style-form" method="POST" enctype="multipart/form-data" action="{{ url('admin/car/update') }}">
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Name</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+                      <input class=" form-control" id="cname" name="name" value="{{ $car['car_name'] }}" type="text" required />
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Model</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="model" minlength="2" type="text" required />
+                      <input class=" form-control" id="cname" name="model" value="{{ $car['car_model'] }}" type="text" required />
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="cemail" class="control-label col-lg-2">Price</label>
                     <div class="col-lg-10">
-                      <input class="form-control " id="cemail" type="text" name="price" required />
+                      <input class="form-control " id="cemail" type="text" value="{{ $car['price'] }}" name="price" required />
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Capacity (seats)</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="capacity" type="text" required />
+                      <input class=" form-control" id="cname" name="capacity" value="{{ $car['capacity'] }}" type="text" required />
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label for="curl" class="control-label col-lg-2">Image Upload</label>
+                    <label for="curl" class="control-label col-lg-2">Image Upload (If changing)</label>
                     <div class="col-lg-10">
                        <span class="btn btn-theme02 btn-file">
                         <!--   <span class="fileupload-new"><i class="fa fa-paperclip"></i> Select image</span> -->
+                        <img src = "{{ URL::to('/').'/uploads/'.$car['image'] }}" height="120px" />
                       
-                        <input type="file" class="fileupload-new " name="image" required="" />
+                        <input type="file" class="fileupload-new " name="image"  />
                         </span>
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="ccomment" class="control-label col-lg-2">Description</label>
                     <div class="col-lg-10">
-                      <textarea class="form-control " id="ccomment" name="description" required></textarea>
+                      <textarea class="form-control " id="ccomment" name="description" required>{{ $car['car_description'] }}</textarea>
                     </div>
                   </div>
                   <div class="form-group ">
@@ -77,16 +78,19 @@
                     <div class="col-lg-10">
                      <!--  <textarea class="form-control " id="ccomment" name="description" required></textarea> -->
                      <select class="form-control" name="status">
-                       <option value="available">available</option>
-                       <option value="unavailable">unavailable</option>
+                       <option  @if(old('status',$car['status']) == 'available') selected="" @endif value="available">available</option>
+                       <option @if(old('status',$car['status']) == 'unavailable') selected="" @endif value="unavailable">unavailable</option>
                      </select>
                     </div>
                   </div>
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                  <input type = 'hidden' name = '_method' value = 'PUT' />
+                  <input type = 'hidden' name = 'id' value = "{{ $car['id']}}" />
+                  <input type = 'hidden' name = 'oldimage' value = "{{ $car['image']}}" />
                   <input type="hidden" name="type" value="company">
                   <div class="form-group">
                     <div class="col-lg-offset-2 col-lg-10">
-                      <button class="btn btn-theme" type="submit">Save</button>
+                      <button class="btn btn-theme" type="submit">Save Changes</button>
                       <!-- <button class="btn btn-theme04" type="button">Cancel</button> -->
                     </div>
                   </div>

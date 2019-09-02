@@ -17,13 +17,7 @@ class AdminController extends Controller
      public function profile(){
     	return view('admin/profile');
     }
-     public function view_car(){
-        return view('admin/view_car');
-    }
-    public function addCar(){
-        return view('admin/addCar');
-    }
-
+   
 
 
 

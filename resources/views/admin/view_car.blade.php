@@ -6,134 +6,79 @@
     <section id="main-content">
       <section class="wrapper">
         <h3><i class="fa fa-angle-right"></i>Car Details</h3>
+
         
         <!-- row -->
         <div class="row mt">
           <div class="col-md-12">
             <div class="content-panel">
+              @if(\Session::has('msg'))
+          <div class = 'alert alert-success'>
+            <p>{{ \Session::get('msg') }}</p>
+          </div></br>
+          @endif
+          @if($errors->any())
+          <div class = 'alert alert-danger'>
+            <ul>
+              @foreach($errors->all() as $e)
+              <li>{{ $e }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
               <table class="table table-striped table-advance table-hover">
                 <a href="{{ url('admin/car') }}" class="btn btn-theme" >Add Car</a>
                 <hr>
                 <thead>
                   <tr>
+                    <th><i class="fa fa-bullhorn"></i> ID</th>
                     <th><i class="fa fa-bullhorn"></i> Name</th>
+                    <th><i class="fa fa-bullhorn"></i> Model</th>
                     <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
-                    <th><i class="fa fa-bookmark"></i> Price</th>
+                    <th><i class="fa fa-bookmark"></i> Price (Rs)</th>
+                    <th><i class="fa fa-bullhorn"></i> Type</th>
+                    <th><i class="fa fa-bullhorn"></i> Capacity (seats)</th>
+                    <th><i class=" fa fa-edit"></i> Image</th>
                     <th><i class=" fa fa-edit"></i> Status</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
+
+                  @foreach($cars as $c)
                   <tr>
+                    <td>{{ $c['id'] }}</td>
+                    <td>{{ $c['car_name'] }}</td>
+                    <td>{{ $c['car_model'] }}</td>
+                    <td>{{ $c['car_description'] }}</td>
+                    <td>{{ $c['price'] }}</td>
+                    <td>{{ $c['type'] }}</td>
+                    <td>{{ $c['capacity'] }}</td>
+                    <td><img style = "height:120px; width:auto;' >" src = "{{ URL::to('/').'/uploads/'.$c['image'] }}"> </td>
+                    <td>{{ $c['status'] }}</td>
+                   
+
+
+                   <!--  <td><span class="label label-info label-mini">Due</span></td> -->
                     <td>
-                      <a href="basic_table.html#">Company Ltd</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>12000.00$ </td>
-                    <td><span class="label label-info label-mini">Due</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">
-                        Dashio co
-                        </a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>17900.00$ </td>
-                    <td><span class="label label-warning label-mini">Due</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">
-                        Another Co
-                        </a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>14400.00$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                     <!--  <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
+                      <a href="{{ url('admin/edit/car/'.$c['id']) }}" style="float: left;" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+
+                      <form action = "{{ url('admin/car/delete') }}" method = 'POST' style="float: right;">
+                      <input type = 'hidden' name = 'id' value = "{{ $c['id'] }}" />
+                      <input type = 'hidden' name = '_token' value = '{{ csrf_token() }}' />
+                      <input type = 'hidden' name = '_method' value = 'DELETE' />
+                     <button style="height: 22px" class="btn btn-danger btn-xs fa fa-trash-o"></button>
+                      </form>
+
+                      <!-- <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></a> -->
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">Dashio ext</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>22000.50$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>
-                      <a href="basic_table.html#">Dashio ext</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>22000.50$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>
-                      <a href="basic_table.html#">Dashio ext</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>22000.50$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                   <tr>
-                    <td>
-                      <a href="basic_table.html#">Dashio ext</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>22000.50$ </td>
-                    <td><span class="label label-success label-mini">Paid</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">Total Ltd</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>12120.00$ </td>
-                    <td><span class="label label-warning label-mini">Due</span></td>
-                    <td>
-                      <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                      <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                      <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                    </td>
-                  </tr>
+                  @endforeach
+               
                 </tbody>
               </table>
+              {{ $cars->links() }}
             </div>
             <!-- /content-panel -->
           </div>
