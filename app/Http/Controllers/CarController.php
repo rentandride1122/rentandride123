@@ -8,8 +8,14 @@ use File;
 class CarController extends Controller
 {
     public function view_car(){
-    	$cars = \App\Car::paginate(5);
-        return view('admin/view_car',compact('cars'));
+    	$cars = \App\Car::where('type','company')->orderBy('created_at','DESC')->paginate(5);
+        $cars_count = \App\Car::where('type','company');
+        return view('admin/view_car',compact('cars','cars_count'));
+    }
+    public function view_private_cars(){
+        $cars = \App\Car::where('type','private')->orderBy('created_at','DESC')->paginate(5);
+        $cars_count = \App\Car::where('type','private');
+        return view('admin/view_private_car',compact('cars','cars_count'));
     }
     public function addCar(){
         return view('admin/addCar');
@@ -43,7 +49,9 @@ class CarController extends Controller
 		$car->type = $r->get('type');
     	$car->capacity = $r->get('capacity');
     	$car->image = $imgname;
-    	$car->status = $r->get('status');
+        $car->fuel_type = $r->get('fuel_type');
+        $car->aircondition = $r->get('ac');
+        $car->user_type = 'admin';
     	$car->save();
 
     	return redirect('/admin/car')->with('msg','Car added successfully');
@@ -91,7 +99,8 @@ class CarController extends Controller
     	$car->car_description = $r->get('description');
 		$car->type = $r->get('type');
     	$car->capacity = $r->get('capacity');
-    	$car->status = $r->get('status');
+        $car->fuel_type = $r->get('fuel_type');
+        $car->aircondition = $r->get('ac');
     	$car->save();
 
     	return redirect('/admin/car/view')->with('msg','Updated successfully');

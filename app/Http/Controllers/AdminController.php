@@ -14,9 +14,24 @@ class AdminController extends Controller
     public function index(){
     	return view('admin/index');
     }
-     public function profile(){
+    public function profile(){
     	return view('admin/profile');
     }
+
+
+    public function view_users(){
+        $count_users = \App\User::where('user_type',null);
+        $users = \App\User::where('user_type',null)->orderBy('created_at','DESC')->paginate(5);
+        return view('admin/view_users',compact('users','count_users'));
+    }
+     public function delete_user(Request $r)
+    {
+        $id = $r->get('id');
+        $user = \App\User::find($id);
+        $user->delete();
+        return redirect('admin/view/users')->with('msg','User deleted');
+    }
+   
    
 
 

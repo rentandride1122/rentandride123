@@ -17,11 +17,14 @@ class CreateCarsTable extends Migration
             $table->bigIncrements('id');
             $table->string('car_name');
             $table->string('car_model');
-            $table->string('car_description');
+            $table->text('car_description');
             $table->double('price');
             $table->string('type');
             $table->integer('capacity');
             $table->string('image');
+            $table->string('fuel_type');
+            $table->string('aircondition');
+            $table->string('user_type');
             $table->timestamps();
         });
     }

@@ -13,11 +13,30 @@
            <li>
             <a href="{{ url('admin/car/view') }}">
               <i class="fa fa-map-marker"></i>
-              <span>Car</span>
+              <span>Cars</span>
+              </a>
+          </li>
+          <li>
+            <a href="{{ url('admin/view/private_cars') }}">
+              <i class="fa fa-map-marker"></i>
+              <span>Private Cars</span>
+              </a>
+          </li>
+          <li>
+            <a href="{{ url('admin/view/users') }}">
+              <i class="fa fa-map-marker"></i>
+              <span>Users</span>
+              </a>
+          </li>
+           <li>
+            <a href="#">
+              <i class="fa fa-map-marker"></i>
+              <span>Booking Details</span>
               </a>
           </li>
           
-         <li class="sub-menu">
+          
+         <!-- <li class="sub-menu">
             <a href="javascript:;">
               <i class="fa fa-th"></i>
               <span>Tables</span>
@@ -108,7 +127,7 @@
               <i class="fa fa-map-marker"></i>
               <span>Google Maps </span>
               </a>
-          </li>
+          </li> -->
         </ul>
         <!-- sidebar menu end-->
       </div>

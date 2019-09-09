@@ -52,7 +52,7 @@
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Capacity (seats)</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="capacity" value="{{ $car['capacity'] }}" type="text" required />
+                      <input class=" form-control" id="cname" name="capacity" value="{{ $car['capacity'] }}" type="number" required />
                     </div>
                   </div>
                   
@@ -73,16 +73,28 @@
                       <textarea class="form-control " id="ccomment" name="description" required>{{ $car['car_description'] }}</textarea>
                     </div>
                   </div>
+
                   <div class="form-group ">
-                    <label for="ccomment" class="control-label col-lg-2">Status</label>
+                    <label for="ccomment" class="control-label col-lg-2">Fuel Type</label>
                     <div class="col-lg-10">
                      <!--  <textarea class="form-control " id="ccomment" name="description" required></textarea> -->
-                     <select class="form-control" name="status">
-                       <option  @if(old('status',$car['status']) == 'available') selected="" @endif value="available">available</option>
-                       <option @if(old('status',$car['status']) == 'unavailable') selected="" @endif value="unavailable">unavailable</option>
+                     <select class="form-control" name="fuel_type">
+                       <option  @if(old('fuel_type',$car['fuel_type']) == 'petrol') selected="" @endif value="petrol">petrol</option>
+                       <option @if(old('fuel_type',$car['fuel_type']) == 'diseal') selected="" @endif value="diseal">diseal</option>
                      </select>
                     </div>
                   </div>
+                  <div class="form-group ">
+                    <label for="ccomment" class="control-label col-lg-2">Air Condition</label>
+                    <div class="col-lg-10">
+                     <!--  <textarea class="form-control " id="ccomment" name="description" required></textarea> -->
+                     <div class="form-control">
+                     <input type="radio" name="ac" value="yes" @if(old('aircondition',$car['aircondition']) == 'yes') checked="" @endif>Yes
+                     <input type="radio" name="ac" value="no" @if(old('aircondition',$car['aircondition']) == 'no') checked="" @endif>No
+                     </div>
+                    </div>
+                  </div>
+
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type = 'hidden' name = '_method' value = 'PUT' />
                   <input type = 'hidden' name = 'id' value = "{{ $car['id']}}" />

@@ -4,13 +4,17 @@
 
 <!--main content start-->
     <section id="main-content">
-      <section class="wrapper">
+      <section class="wrapper" style="height: 1000px">
         <h3><i class="fa fa-angle-right"></i>Car Details</h3>
-
+        
+          Total: {{  $cars_count->count() }} 
+           
         
         <!-- row -->
         <div class="row mt">
+
           <div class="col-md-12">
+             <a href="{{ url('admin/car') }}" class="btn btn-theme" >Add Car</a>
             <div class="content-panel">
               @if(\Session::has('msg'))
           <div class = 'alert alert-success'>
@@ -27,19 +31,20 @@
           </div>
           @endif
               <table class="table table-striped table-advance table-hover">
-                <a href="{{ url('admin/car') }}" class="btn btn-theme" >Add Car</a>
-                <hr>
+               
+                
                 <thead>
                   <tr>
-                    <th><i class="fa fa-bullhorn"></i> ID</th>
-                    <th><i class="fa fa-bullhorn"></i> Name</th>
-                    <th><i class="fa fa-bullhorn"></i> Model</th>
-                    <th class="hidden-phone"><i class="fa fa-question-circle"></i> Descrition</th>
-                    <th><i class="fa fa-bookmark"></i> Price (Rs)</th>
-                    <th><i class="fa fa-bullhorn"></i> Type</th>
-                    <th><i class="fa fa-bullhorn"></i> Capacity (seats)</th>
-                    <th><i class=" fa fa-edit"></i> Image</th>
-                    <th><i class=" fa fa-edit"></i> Status</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Model</th>
+                    <th>Descrition</th>
+                    <th>Price (Rs)</th>
+                 
+                    <th>Capacity (seats)</th>
+                    <th>Image</th>
+                    <th>Fuel Type</th>
+                    <th>Air Condition</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -52,19 +57,20 @@
                     <td>{{ $c['car_model'] }}</td>
                     <td>{{ $c['car_description'] }}</td>
                     <td>{{ $c['price'] }}</td>
-                    <td>{{ $c['type'] }}</td>
+                    
                     <td>{{ $c['capacity'] }}</td>
                     <td><img style = "height:120px; width:auto;' >" src = "{{ URL::to('/').'/uploads/'.$c['image'] }}"> </td>
-                    <td>{{ $c['status'] }}</td>
+                    <td>{{ $c['fuel_type'] }}</td>
+                    <td>{{ $c['aircondition'] }}</td>
                    
 
 
                    <!--  <td><span class="label label-info label-mini">Due</span></td> -->
                     <td>
                      <!--  <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button> -->
-                      <a href="{{ url('admin/edit/car/'.$c['id']) }}" style="float: left;" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
+                      <a href="{{ url('admin/edit/car/'.$c['id']) }}" class="btn btn-success btn-xs"><i class="fa fa-pencil"></i></a>
 
-                      <form action = "{{ url('admin/car/delete') }}" method = 'POST' style="float: right;">
+                      <form action = "{{ url('admin/car/delete') }}" method = 'POST'>
                       <input type = 'hidden' name = 'id' value = "{{ $c['id'] }}" />
                       <input type = 'hidden' name = '_token' value = '{{ csrf_token() }}' />
                       <input type = 'hidden' name = '_method' value = 'DELETE' />

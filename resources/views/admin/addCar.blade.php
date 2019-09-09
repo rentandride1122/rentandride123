@@ -34,25 +34,25 @@
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Name</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="name" minlength="2" type="text" required />
+                      <input class=" form-control" value="{{ old('name') }}" name="name" minlength="2" type="text" required />
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Model</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="model" minlength="2" type="text" required />
+                      <input class=" form-control" value="{{ old('model') }}" name="model" minlength="2" type="text" required />
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="cemail" class="control-label col-lg-2">Price</label>
                     <div class="col-lg-10">
-                      <input class="form-control " id="cemail" type="text" name="price" required />
+                      <input class="form-control " value="{{ old('price') }}" type="text" name="price" required />
                     </div>
                   </div>
                   <div class="form-group ">
                     <label for="cname" class="control-label col-lg-2">Capacity (seats)</label>
                     <div class="col-lg-10">
-                      <input class=" form-control" id="cname" name="capacity" type="text" required />
+                      <input class=" form-control" value="{{ old('capacity') }}" name="capacity" type="number" required />
                     </div>
                   </div>
                   
@@ -69,19 +69,30 @@
                   <div class="form-group ">
                     <label for="ccomment" class="control-label col-lg-2">Description</label>
                     <div class="col-lg-10">
-                      <textarea class="form-control " id="ccomment" name="description" required></textarea>
+                      <textarea class="form-control" name="description" required>{{ old('description') }}</textarea>
                     </div>
                   </div>
                   <div class="form-group ">
-                    <label for="ccomment" class="control-label col-lg-2">Status</label>
+                    <label for="ccomment" class="control-label col-lg-2">Fuel Type</label>
                     <div class="col-lg-10">
                      <!--  <textarea class="form-control " id="ccomment" name="description" required></textarea> -->
-                     <select class="form-control" name="status">
-                       <option value="available">available</option>
-                       <option value="unavailable">unavailable</option>
+                     <select class="form-control" name="fuel_type">
+                       <option value="petrol">Petrol</option>
+                       <option value="diseal">Diseal</option>
                      </select>
                     </div>
                   </div>
+                  <div class="form-group ">
+                    <label for="ccomment" class="control-label col-lg-2">Air Condition</label>
+                    <div class="col-lg-10">
+                     <!--  <textarea class="form-control " id="ccomment" name="description" required></textarea> -->
+                     <div class="form-control">
+                     <input type="radio" name="ac" value="yes">Yes
+                     <input type="radio" name="ac" value="no" checked="">No
+                     </div>
+                    </div>
+                  </div>
+                 
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <input type="hidden" name="type" value="company">
                   <div class="form-group">
